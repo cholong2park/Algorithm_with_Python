@@ -10,6 +10,8 @@ N이 K로 나누어떨어질 때만 선택할 수 있다.
 - 입력 예시     - 출력 예시
 25 5             2
 """
+import time
+start = time.time()
 
 n, k = map(int, input().split(' '))
 
@@ -24,3 +26,5 @@ while n != 1:   # n이 1이 아니면 계속 반복! (1이 되는 순간 종료)
         count += 1  # 횟수 1 추가!
 
 print(count)
+
+print("time :", time.time() - start)
