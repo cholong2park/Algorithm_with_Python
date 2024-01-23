@@ -18,8 +18,11 @@ for i in range(n):
     number.append(input().split(' '))
 # 해당 for문을 통해서 number는 list를 인자로 가지는 list 구조가 되었다. (행과 열을 가진 바둑판과 같은 형태)
 
-count = {}
+count = [] # row(행)들을 돌면서 가장 작은 수들을 넣어 줄 새 list 생성
 
-for row in number:
-    for colum in row:   # 만든 number를 순회
-        count[colum] = 1
+for row in number:  # row를 순회
+    row.sort()
+    count.append(row[0])
+
+count.sort(reverse=True)    # 큰 수가 index 0로 위치하도록 정렬
+print(count[0])
