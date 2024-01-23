@@ -13,12 +13,12 @@ N: 배열의 크기, M: 숫자가 더해지는 횟수, K: 숫자가 연속가능
     46
 """
 n, m, k = map(int, input().split(' '))  # map 함수로 각각에 인자에 int 적용 / .split('구분자')를 통해 input()로 넣은 것들을 띄어쓰기로 짤라서 n, m, k에 넣어줌
-number = input().split(' ')  # n 갯수의 자연수를 입력하고 list에 넣고 number에 할당
+number = list(set(input().split(' ')))  # n 갯수의 자연수를 입력하고 list에 넣고 number에 할당
 
-number.sort()   # sort()를 통하여 오름차순 정렬
+number.sort(reverse=True)   # sort()를 통하여 내림차순 정렬
 
-big_2 = int(number[n - 2])
-big = int(number[n - 1])
+big_2 = int(number[1])
+big = int(number[0])
 
 count = 0
 result = 0
