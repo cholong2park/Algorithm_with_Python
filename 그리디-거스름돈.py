@@ -5,11 +5,13 @@
 """
 
 n = int(input())
-k = list(input().split())   # 내가 가지고 있는 동전의 종류
+k = list(input().split())   # 내가 가지고 있는 동전의 종류, [500, 100, 50, 10]으로 list로 할당
 
 count = 0   # 몇 개의 동전이 필요한지 횟수 저장할 변수
 
-for i in k:
+# .sort(reverse=Ture) 큰 동전이 앞으로 오게
+
+for i in k: # 변수 이름을 연관성 있게 작성하기 i => coin, k => coin_list
     count += n // int(i)
     n %= int(i)
 
