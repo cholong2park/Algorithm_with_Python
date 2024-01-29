@@ -47,6 +47,8 @@ for _ in range(map_xy[1]):
         character[0] = int(character[0]) + 1
     # 북이면
         character[0] = int(character[0]) - 1
+			drow = [-1, 
+			dcloum = [
 """
 
 character_map_list = [] # 캐릭터가 중복된 위치로 안가게 방지하기 위해 캐릭터가 있었던 위치들을 저장할 리스트
@@ -72,14 +74,6 @@ while (0 < character[0] and character[0] < map_xy[1]) and (0 < character[1] and 
                     else:   # 방향이 서이면
                         character[1] += 1
                         continue
-                else:   # 4방향 중에 나아갈 길이 있다면 아래 코드 실행
-                    pass
-            else:
-                pass
-        else:
-            pass
-    else:
-        pass
 
     character[2] = (3 + character[2]) % 4  # 일단 보는 방향에서 왼쪽 방향을 보게 만들자
     if character[2] == 0:   # 회전 후 보는 방향이 북이면
