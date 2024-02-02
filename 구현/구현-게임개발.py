@@ -23,98 +23,59 @@
 출력 조건
     - 첫째 줄에 이동을 마친 후 캐릭터가 방문한 칸의 수를 출력한다.
 """
-
-map_xy = list(map(int, list(input().split(' ')))) # [int형(열), int형(행)]
-character = list(map(int, list(input().split(' '))))   # [int형(행), int형(열), int형(방향)]
-
-real_map = []
-for _ in range(map_xy[1]):
-    map_row = list(map(int, list(input().split(' '))))
-    real_map.append(map_row)
-# print(real_map) real_map은 map[0]개의 요소를 가진 list를 map[1]개 가지고 있는 바둑판이다.
-
 """    
 캐릭터 움직임
 # 왼쪽으로 회전
     character[2] = (3 + int(character[2])) % 4 # 1(동)->0(북), 2(남)->1(동), 3(서)->2(남), 0(북)->3(서)
 
 # 회전 후에 움직이기 
-    # 동이면
+    # 동이면 1
         character[1] = int(character[1]) + 1
-    # 서이면
+    # 서이면 3
         character[1] = int(character[1]) - 1
-    # 남이면
+    # 남이면 2
         character[0] = int(character[0]) + 1
-    # 북이면
+    # 북이면 0
         character[0] = int(character[0]) - 1
-			drow = [-1, 
-			dcloum = [
+
 """
+def move(arr, direction):
+    dx = [-1, 0, 1, 0]
+    dy = [0, 1, 0, -1]
+    arr[0] += dx[direction]
+    arr[1] += dy[direction]
 
-character_map_list = [] # 캐릭터가 중복된 위치로 안가게 방지하기 위해 캐릭터가 있었던 위치들을 저장할 리스트
-character_map_list.append(character[0:1])   # character에서 방향 요소를 빼고 처음 위치 요소만 저장
+N, M = map(int, input().split())
+*point, direction = list(map(int, input().split()))
+map_in = [list(map(int, input().split())) for _ in range(N)]
 
-# 정해진 반복 횟수가 없기에 while문을 조건으로는 외곽으로 가면 종료(외곽은 온통 1이다)
+count = 0   # 움직였다는건 새로운 곳을 방문했다는 것! 움직일때마다 count += 1
+map_in[point[0]][point[1]] -= 1 # 방문할때마다 map_in에 새겨진 값들을 하나씩 뺄 것임
 
-while (0 < character[0] and character[0] < map_xy[1]) and (0 < character[1] and character[1] < map_xy[0]):
-    # 일단 4 방향 탐색 시작
-    if real_map[character[0] - 1][character[1]] == 1 or ([(character[0] - 1), character[1]] in character_map_list):
-        if real_map[character[0] + 1][character[1]] == 1 or ([(character[0] + 1), character[1]] in character_map_list):
-            if real_map[character[0]][character[1] - 1] == 1 or ([(character[0]), (character[1] - 1)] in character_map_list):
-                if real_map[character[0]][character[1] + 1] == 1 or ([character[0], (character[1] + 1)] in character_map_list):
-                    if character[2] == 0: # 방향이 북이면 
-                        character[0] += 1
-                        continue
-                    elif character[2] == 1: # 방향이 동이면
-                        character[1] -= 1
-                        continue
-                    elif character[2] == 2: # 방향이 남이면
-                        character[0] -= 1
-                        continue
-                    else:   # 방향이 서이면
-                        character[1] += 1
-                        continue
-
-    character[2] = (3 + character[2]) % 4  # 일단 보는 방향에서 왼쪽 방향을 보게 만들자
-    if character[2] == 0:   # 회전 후 보는 방향이 북이면
-        if real_map[character[0] - 1][character[1]] != 1: # 이동한 곳이 바다가 아니라면
-            if [(character[0] - 1), character[1]] not in character_map_list: # 이동한 곳이 갔었던 곳도 아니라면
-                character[0] = character[0] - 1    # 이동하고
-                character_map_list.append(character[0:1]) # 위치 저장!
-            else:   # 이동한 곳이 갔었던 곳이라면 다시 처음(방향 전환)부터
-                continue
-        else:   # 이동한 곳이 바다라면 다시 처음(방향 전환)부터
-            continue
-            
-
-    elif character[2] == 1: # 회전 후 보는 방향이 동이면 
-        if real_map[character[0]][character[1] + 1] != 1: # 이동한 곳이 바다가 아니라면
-            if [character[0], (character[1] + 1)] not in character_map_list: # 이동한 곳이 갔었던 곳도 아니라면
-                character[1] = character[1] + 1    # 이동하고
-                character_map_list.append(character[0:1]) # 위치 저장!
-            else:   # 이동한 곳이 갔었던 곳이라면 다시 처음(방향 전환)부터
-                continue
-        else:   # 이동한 곳이 바다라면 다시 처음(방향 전환)부터
-            continue
-
-    elif character[2] == 2:   # 회전 후 보는 방향이 남이면 
-        if real_map[character[0] + 1][character[1]] != 1: # 이동한 곳이 바다가 아니라면
-            if [(character[0] + 1), character[1]] not in character_map_list: # 이동한 곳이 갔었던 곳도 아니라면
-                character[0] = character[0] + 1    # 이동하고
-                character_map_list.append(character[0:1]) # 위치 저장!
-            else:   # 이동한 곳이 갔었던 곳이라면 다시 처음(방향 전환)부터
-                continue
-        else:   # 이동한 곳이 바다라면 다시 처음(방향 전환)부터
-            continue
-    
-    else:   # 회전 후 보는 방향이 서이면
-        if real_map[character[0]][character[1] - 1] != 1: # 이동한 곳이 바다가 아니라면
-            if [character[0], (character[1] - 1)] not in character_map_list: # 이동한 곳이 갔었던 곳도 아니라면
-                character[1] = character[1] - 1    # 이동하고
-                character_map_list.append(character[0:1]) # 위치 저장!
-            else:   # 이동한 곳이 갔었던 곳이라면 다시 처음(방향 전환)부터
-                continue
-        else:   # 이동한 곳이 바다라면 다시 처음(방향 전환)부터
-            continue
-
-print(len(character_map_list[1:]))  # 첫번째 위치 요소는 빼고 방문한 갯수 출력
+while 0 < point[0] < N-1 and 0 < point[1] < M-1:
+    if map_in[point[0]-1][point[1]] == 0:
+        direction = 0
+        move(point, direction)
+        count += 1
+        map_in[point[0]][point[1]] -= 1
+    elif map_in[point[0]][point[1]+1] == 0:
+        direction = 1
+        move(point, direction)
+        count += 1
+        map_in[point[0]][point[1]] -= 1
+    elif map_in[point[0]+1][point[1]] == 0:
+        direction = 2
+        move(point, direction)
+        count += 1
+        map_in[point[0]][point[1]] -= 1
+    elif map_in[point[0]][point[1]-1] == 0:
+        direction = 3
+        move(point, direction)
+        count += 1
+        map_in[point[0]][point[1]] -= 1
+    else:
+        direction = (direction + 2) % 4
+        while 0 < point[0] < N-1 and 0 < point[1] < M-1:
+            move(point, direction)
+            count += 1
+print(count-1)  # 1을 빼주는 이유는 마지막으로 바다로 뛰어드는 횟수는 차감
