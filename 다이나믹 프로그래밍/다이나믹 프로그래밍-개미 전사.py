@@ -13,3 +13,18 @@
 - 출력 조건
     - 첫째 줄에 개미 전사가 얻을 수 있는 식량의 최댓값을 출력하시오.
 """
+"""
+i=0 max(arr[0]+arr[2], arr[0]+arr[3])
+i=1 max(arr[1]+arr[3], arr[1]+arr[4])
+i=2 max(arr[2]+arr[4], arr[2]+arr[5])
+"""
+def max(arr):
+    if len(arr) == 1:
+        return arr[0]
+    elif len(arr) == 2:
+        return max(arr[0], arr[1])
+    elif len(arr) == 3:
+        return max(arr[0]+arr[2], arr[1])
+    else:
+        for i in range(0, )
+            num max(arr[i]+arr[i+2], arr[i]+arr[i+3])
