@@ -14,17 +14,32 @@
     - 첫째 줄에 개미 전사가 얻을 수 있는 식량의 최댓값을 출력하시오.
 """
 """
+앞의 2개를 선택하면 뒤의 수는 정해질 수 있다.
 i=0 max(arr[0]+arr[2], arr[0]+arr[3])
 i=1 max(arr[1]+arr[3], arr[1]+arr[4])
 i=2 max(arr[2]+arr[4], arr[2]+arr[5])
+i=3 max(arr[3]+arr[5], arr[3]+arr[6])
+......
+i=n-2 max(arr[n-2]+arr[n], arr[n]+arr[n+3])
+i=n-1 max(arr[n-1]+arr[n+1], arr[n-1]+arr[n+2])
+i=n max(arr[n]+arr[n+2], arr[n]+arr[n+3])
 """
-def max(arr):
-    if len(arr) == 1:
-        return arr[0]
-    elif len(arr) == 2:
-        return max(arr[0], arr[1])
-    elif len(arr) == 3:
-        return max(arr[0]+arr[2], arr[1])
+def max_num(arr, i, N):
+    if len(arr[i:N]) == 1:
+        arr1 = arr[i:N]
+        return arr1[0]
+    elif len(arr[i:N]) == 2:
+        arr2 = arr[i:N]
+        return max(arr2[0], arr2[1])
+    elif len(arr[i:N]) == 3:
+        arr3 = arr[i:N]
+        return max(arr3[0]+arr3[2], arr3[1])
     else:
-        for i in range(0, )
-            num max(arr[i]+arr[i+2], arr[i]+arr[i+3])
+        return max(arr[i]+max_num(arr, i+2, N), arr[i]+max_num(arr, i+3, N))
+    
+N = int(input())
+arr = list(map(int, input().split()))
+if max_num(arr, 0, N) < max_num(arr, 1, N):
+    print(max_num(arr, 1, N))
+else:
+    print(max_num(arr, 0, N))
