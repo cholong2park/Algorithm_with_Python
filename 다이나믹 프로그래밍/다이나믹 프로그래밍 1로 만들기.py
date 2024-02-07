@@ -15,7 +15,7 @@ def makeone(num):
     for i in range(2, num + 1):
         d[i] += d[i-1] + 1
         if i % 2 == 0:
-            d[i] = min(d[i], d[i//2]+1)
+            d[i] = min(d[i], d[i//2]+1) # 1을 빼고 이전 수에서 진행한 경우를 하는 것이 최소인지, 1을 빼고 나누면서 진행하는게 좋을지
         if i % 3 == 0:
             d[i] = min(d[i], d[i//3]+1)
         if i % 5 == 0:
