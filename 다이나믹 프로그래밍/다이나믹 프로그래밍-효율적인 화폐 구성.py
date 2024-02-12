@@ -18,7 +18,7 @@ N, M = map(int, input().split())
 arr = []
 for _ in range(N):
     arr.append(int(input()))
-"""
+
 d = [0] * (M+1)
 num = M # 원본 M이 훼손되지 않게 M 값을 복사해서 넣어줌
 i = len(arr) - 1
@@ -34,12 +34,14 @@ while True: # 큰 수 부터 하나씩 빼 나가자
     if i == 0 and ((num-arr[i]) < arr[0]):
         print(-1)
         break
-많은 중복 연산이 있다.... 심지어 값을 저장해놓고 그걸 이용하지도 않잖아...
+# 많은 중복 연산이 있다.... 심지어 값을 저장해놓고 그걸 이용하지도 않잖아...
+
 """
+한번 메모이제이션 생각해보자
 d = [0] * (M+1)
 num = M # 원본 M이 훼손되지 않게 M 값을 복사해서 넣어줌
 i = len(arr) - 1
-while True: # 큰 수 부터 하나씩 빼 나가자
+for i in range(arr[len(arr)-1]):
     if num - arr[i] == 0:
         print(d[M]+1)
         break
@@ -51,3 +53,5 @@ while True: # 큰 수 부터 하나씩 빼 나가자
     if i == 0 and ((num-arr[i]) < arr[0]):
         print(-1)
         break
+d[M] = d[M-arr[len(arr)-1]] + 1
+"""
