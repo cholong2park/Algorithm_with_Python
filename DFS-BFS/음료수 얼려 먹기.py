@@ -2,7 +2,7 @@ def dfs(row, colum):
     if row <= -1 or row >= N or colum <= -1 or colum >= M:  # map 밖으로 넘어가면 False 반환하며 바로 종료
         return False
     if map_ice[row][colum] == 0:
-        graph[row][colum] = 1   # 0인 곳에 방문하면 1로 바꾸어 방문했다는 것을 알림
+        map_ice[row][colum] = 1   # 0인 곳에 방문하면 1로 바꾸어 방문했다는 것을 알림
         # 이후 상하좌우로 가서 다시 탐색 시작
         # 밑에서 진행하는 것은 첫 탐색에 결과값에 포함이 된다.
         dfs(row-1, colum)
