@@ -73,8 +73,7 @@ from collections import deque
 def bfs(row, colum):
     d_row = [-1, 1, 0, 0]
     d_colum = [0, 0, -1, 1]
-    queue = deque() # deque를 사용하여 queue 구현
-    queue.append((row, colum))
+    queue = deque((row, colum)) # deque를 사용하여 queue 구현
     while queue:    # queue가 들어있으면 True, 비어있으면 False
         row, colum = queue.popleft()
         for i in range(4):
